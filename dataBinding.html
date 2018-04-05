@@ -1,0 +1,43 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <title>Example1:- Databinding</title>
+  <script src="//code.angularjs.org/snapshot/angular.min.js"></script>
+</head>
+
+<body>
+  <div ng-app ng-init="currentYear=2018">
+    <b>EIT:</b>
+    <div>
+      Given Names:
+      <input type="text" ng-model="fname" placeholder="First Name">
+    </div>
+    <div>
+      Last Name:
+      <input type="text" ng-model="lname" placeholder="Last Name">
+    </div>
+    <div>
+      Date of Birth:
+      <input type="date" ng-model="dob">
+    </div>
+    <div>
+      Gender:
+      <label><input type="radio" value="Male" ng-model="gender">male</label>
+      <label><input type="radio" value="Female" ng-model="gender">female</label>
+    </div>
+    <div>
+      <p>Name(s): {{ fname + " "+lname }}</p>
+      
+      <p>Gender: {{ gender }} </p>
+
+      <p>Date of Birth: {{ dob | date }} </p>
+
+      <p>Age: {{ dob ? currentYear - (dob | date:"y") : "" }} </p>
+    </div>
+  </div>
+</body>
+
+</html>
+
