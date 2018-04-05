@@ -1,0 +1,71 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <title>Example: Controllers</title>
+  <script src="//code.angularjs.org/snapshot/angular.min.js"></script>
+</head>
+
+<body>
+  <div ng-app="mestEits" ng-controller="eitsCtrl as eit">
+    <b>EIT:</b>
+    <div>
+      Given Names:
+      <input type="text" ng-model="eit.fname" placeholder="given names">
+    </div>
+    <div>
+      Last Name:
+      <input type="text" ng-model="eit.lname" placeholder="last name">
+    </div>
+    <div>
+      Date of Birth:
+      <input type="date" ng-model="eit.dob">
+    </div>
+    <div>
+      <!--I use radio selectors to provide options for gender. They are all
+      bound to the same ng-model. The value of ng-model is the 'value' attribute
+      that we specify for the selected input element.-->
+      Gender:
+      <label><input type="radio" value="Male" ng-model="eit.gender">male</label>
+      <label><input type="radio" value="Female" ng-model="eit.gender">female</label>
+      <label><input type="radio" value="Other" ng-model="eit.gender">other</label>
+    </div>
+    <div>
+      <p>Full Name: <b>{{ eit.getfullName() }}</b></p>
+      <p>Gender: <b>{{ eit.gender }}</b></p>
+      <p>Date of Birth: <b>{{ eit.dob | date }}</b></p>
+      <p>Age {{ eit.age() | number:0  }}</p>
+    </div>
+  </div>
+  
+<script>
+var app = angular.module('mestEits', []);
+app.controller('eitsCtrl', function eitsCtrl() {
+  
+  this.fname = "John";
+	this.lname = "Doe";
+	this.gender = "Male";
+	this.currentYear= new Date();
+  this.dob = 1991;
+ 
+   
+
+
+  this.getfullName = function getfullNam(){
+    	return this.fname + " " + this.lname;
+  };
+    
+  this.age = function getAge(){
+    return  (this.currentYear - this.dob) / 31556952000;
+  };
+
+});
+</script>
+  
+</body>
+
+
+
+</html>
+
