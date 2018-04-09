@@ -1,0 +1,77 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Angular Services</title>
+  <script src="//code.angularjs.org/snapshot/angular.min.js"></script>
+  <script src="app.js"></script>
+  <script src="eitService.js"></script>
+</head>
+
+<body>
+  <div  ng-app="eitApp" ng-controller="EitController as ctrl" >
+    <form>
+      <b>ADD NEW EIT:</b>
+      <div>
+        Given Names:
+        <input type="text" ng-model="ctrl.gName" placeholder="given names">
+      </div>
+      <div>
+        Last Name:
+        <input type="text" ng-model="ctrl.lName" placeholder="last name">
+      </div>
+      <div>
+        Date of Birth:
+        <input type="date" ng-model="ctrl.dob">
+      </div>
+      <div>
+        <!--I use radio selectors to provide options for gender. They are all
+        bound to the same ng-model. The value of ng-model is the 'value' attribute
+        that we specify for the selected input element.-->
+        Gender:
+        <label><input type="radio" value="Male" ng-model="ctrl.gender">male</label>
+        <label><input type="radio" value="Female" ng-model="ctrl.gender">female</label>
+        <label><input type="radio" value="Other" ng-model="ctrl.gender">other</label>
+      </div>
+      <button ng-click="ctrl.person()">Add EIT</button>
+    </form>
+    <hr/>
+    <div >
+      <b>VIEW EITS LIST:</b>
+     <ol>
+       <li ng-repeat="eit in ctrl.mestEits">
+          {{ "First Name: "+eit.firstName }}
+          {{ "Lastst Name: "+eit.lastName }}
+          {{ "Age: "+eit.age }}
+          {{ "Gender: "+eit.gender }}
+       </li>
+     </ol>
+     
+    </div>
+    <hr/>
+    <div #viewEitsList>
+      <b>VIEW EIT:</b>
+      <p>Given Names: <b>{{ctrl.gName}}</b></p>
+      <p>Last Name: <b>{{ctrl.lName}}</b></p>
+      <p>Gender: <b>{{ctrl.gender}}</b></p>
+      <!--I format dob on the controller (which is a date object - 
+      https://www.w3schools.com/jsref/jsref_obj_date.asp) using the date filter -
+      https://docs.angularjs.org/api/ng/filter/uppercase.-->
+      <p>Date of Birth: <b>{{ctrl.dob | date}}</b></p>
+      <!--I call getFullName() on the controller, then i filter the result of
+      that using the uppercase filter -
+      https://docs.angularjs.org/api/ng/filter/uppercase.-->
+      <p>Full Name: <b>{{ctrl.getFullName() | uppercase}}</b></p>
+      <!--I call getAge() on the controller.-->
+      <p>Age: <b>{{ctrl.getAge()}}</b></p>
+    </div>
+  </div>
+  
+</body>
+</html>
+
+<!-- 
+Copyright 2018 Google Inc. All Rights Reserved.
+Use of this source code is governed by an MIT-style license that
+can be found in the LICENSE file at http://angular.io/license
+-->
